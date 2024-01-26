@@ -7,7 +7,13 @@ void	*simulate_dinner(void *arg)
 	philo = (t_philo *)arg;
 	while (!philo->dead && philo->nbr_meals)
 	{
-		print_state(*philo, THINK, time_now(), philo->printing_lock);
+		// if (philo->id % 2 == 0)
+		// {
+		// 	print_state(*philo, THINK, time_now(), philo->printing_lock);
+		// 	ft_sleep(philo->time_to_eat - 20);
+		// }
+		// else
+			print_state(*philo, THINK, time_now(), philo->printing_lock);
 		pthread_mutex_lock(philo->fork_1);
 		print_state(*philo, TAKE_FORK, time_now(), philo->printing_lock);
 		pthread_mutex_lock(philo->fork_2);

@@ -30,7 +30,7 @@ void	forks_init(t_philo *philos)
 {
 	int				i;
 	int				nbr_philos;
-	pthread_mutex_t	*fork;
+//	pthread_mutex_t	*fork;
 
 	i = 0;
 	nbr_philos = philos[0].nbr_philos;
@@ -42,16 +42,16 @@ void	forks_init(t_philo *philos)
 		philos[i].fork_2 = philos[(i + 1) % nbr_philos].fork_1;
 		i++;
 	}
-	while (i < nbr_philos)
-	{
-		if ((i % 2) == 0)
-		{
-			fork = philos[i].fork_2;
-			philos[i].fork_2 = philos[i].fork_1;
-			philos[i].fork_1 = fork;
-		}
-		i++;
-	}
+	// while (i < nbr_philos)
+	// {
+	// 	if ((i % 2) == 0)
+	// 	{
+	// 		fork = philos[i].fork_2;
+	// 		philos[i].fork_2 = philos[i].fork_1;
+	// 		philos[i].fork_1 = fork;
+	// 	}
+	// 	i++;
+	// }
 }
 
 void	create_threads(t_philo *philos, void *simulate_dinner)
@@ -69,17 +69,17 @@ void	create_threads(t_philo *philos, void *simulate_dinner)
 				(void *)&philos[i]) != 0)
 			exit(1);
 		pthread_detach(philos[i].philo_thread);
-		i += 2;
+		i += 1;
 	}
-	ft_sleep(10);
-	while (j < nbr_philos)
-	{
-		if (pthread_create(&philos[j].philo_thread, NULL, simulate_dinner,
-				(void *)&philos[j]) != 0)
-			exit(1);
-		pthread_detach(philos[j].philo_thread);
-		j += 2;
-	}
+	// ft_sleep(5);
+	// while (j < nbr_philos)
+	// {
+	// 	if (pthread_create(&philos[j].philo_thread, NULL, simulate_dinner,
+	// 			(void *)&philos[j]) != 0)
+	// 		exit(1);
+	// 	pthread_detach(philos[j].philo_thread);
+	// 	j += 2;
+	// }
 }
 
 void	ft_sleep(size_t exact_time)
