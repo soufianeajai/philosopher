@@ -73,7 +73,7 @@ void	print_state(t_philo philo, char *state, size_t time,
 		return ;
 	pthread_mutex_lock(lock);
 	printf("%lu %d %s\n", (time - philo.start_time), philo.id, state);
-	if (state != DEAD)
+	if (strncmp(state, DEAD, strlen(DEAD)) != 0)
 		pthread_mutex_unlock(lock);
 }
 // do not change anything in this function !!!!!~!
